@@ -21,7 +21,7 @@ void main() {
 
   setUpAll(() {
     registerFallbackValue(const FetchPropertiesEvent());
-    registerFallbackValue(ApplyFilterEvent(FilterParams()));
+    registerFallbackValue(const ApplyFilterEvent(FilterParams()));
   });
 
   setUp(() {
@@ -80,7 +80,10 @@ void main() {
   });
 
   testWidgets('PropertyListScreen opens filter sheet and applies filter', (WidgetTester tester) async {
-    when(() => mockViewModel.state).thenReturn(PropertyLoadedState([]));
+    await tester.binding.setSurfaceSize(const Size(1200, 1800));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+
+    when(() => mockViewModel.state).thenReturn(const PropertyLoadedState([]));
 
     await tester.pumpWidget(
       MultiProvider(
@@ -101,7 +104,9 @@ void main() {
     expect(find.text('Filters'), findsOneWidget);
 
     // Tap price filter
-    await tester.tap(find.text('Budget: Under \$500,000'));
+    final budgetFilter = find.text('Budget: Under \$500,000');
+    await tester.ensureVisible(budgetFilter);
+    await tester.tap(budgetFilter);
     await tester.pumpAndSettle();
 
     verify(() => mockViewModel.add(any(that: isA<ApplyFilterEvent>()))).called(1);
