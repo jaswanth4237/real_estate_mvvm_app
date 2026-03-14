@@ -1,11 +1,20 @@
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:real_estate_mvvm_app/core/performance/performance_monitor.dart';
+import 'package:real_estate_mvvm_app/core/utils/app_data_path.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   late PerformanceMonitor monitor;
 
   setUp(() {
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+        .setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      (MethodCall methodCall) async => Directory.systemTemp.path,
+    );
     monitor = PerformanceMonitor();
   });
 
@@ -18,7 +27,7 @@ void main() {
     );
 
     // assert
-    final file = File('app_data/performance_metrics.json');
+    final file = await AppDataPath.getFile('performance_metrics.json');
     expect(await file.exists(), true);
   });
 }
