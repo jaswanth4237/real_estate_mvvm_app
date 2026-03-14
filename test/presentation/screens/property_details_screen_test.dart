@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:real_estate_mvvm_app/presentation/screens/property_details_screen.dart';
 import 'package:real_estate_mvvm_app/presentation/viewmodels/property_details_viewmodel.dart';
 import 'package:real_estate_mvvm_app/core/theme/app_theme.dart';
-import 'package:real_estate_mvvm_app/core/accessibility/accessibility_service.dart';
+import 'package:real_estate_mvvm_app/core/di/accessibility/accessibility_service.dart';
 import 'package:real_estate_mvvm_app/data/models/property_model.dart';
 
 class MockPropertyDetailsViewModel extends Mock implements PropertyDetailsViewModel {}
