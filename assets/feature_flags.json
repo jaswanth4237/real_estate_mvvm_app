@@ -1,0 +1,21 @@
+{
+    "flags": [
+        {
+            "flagKey": "new_property_card_design",
+            "enabled": true,
+            "variants": [
+                "classic",
+                "modern"
+            ],
+            "userPercentage": 100
+        },
+        {
+            "flagKey": "dark_mode_beta",
+            "enabled": true,
+            "variants": [
+                "enabled"
+            ],
+            "userPercentage": 100
+        }
+    ]
+}
