@@ -1,0 +1,24 @@
+{
+  "light": {
+    "primary": "#03A9F4",
+    "secondary": "#2196F3",
+    "background": "#FFFFFF",
+    "surface": "#F5F5F5",
+    "error": "#B00020",
+    "onPrimary": "#FFFFFF",
+    "onSecondary": "#000000",
+    "onBackground": "#000000",
+    "onSurface": "#000000"
+  },
+  "dark": {
+    "primary": "#90CAF9",
+    "secondary": "#81D4FA",
+    "background": "#121212",
+    "surface": "#1E1E1E",
+    "error": "#CF6679",
+    "onPrimary": "#000000",
+    "onSecondary": "#000000",
+    "onBackground": "#FFFFFF",
+    "onSurface": "#FFFFFF"
+  }
+}
