@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../domain/interfaces/i_theme_service.dart';
+import '../constants.dart';
 
 class AppTheme {
   static Map<String, dynamic>? _themeConfig;
@@ -78,16 +80,18 @@ class AppTheme {
   }
 }
 
-class ThemeService extends ChangeNotifier {
+class ThemeService extends ChangeNotifier implements IThemeService {
   final SharedPreferences prefs;
   late String _selectedTheme;
 
   ThemeService(this.prefs) {
-    _selectedTheme = prefs.getString('selected_theme') ?? 'system';
+    _selectedTheme = prefs.getString(AppConstants.keySelectedTheme) ?? 'system';
   }
 
+  @override
   String get selectedTheme => _selectedTheme;
 
+  @override
   bool get isDarkMode {
     if (_selectedTheme == 'dark') return true;
     if (_selectedTheme == 'light') return false;
@@ -95,9 +99,10 @@ class ThemeService extends ChangeNotifier {
         Brightness.dark;
   }
 
+  @override
   Future<void> setTheme(String theme) async {
     _selectedTheme = theme;
-    await prefs.setString('selected_theme', theme);
+    await prefs.setString(AppConstants.keySelectedTheme, theme);
     notifyListeners();
   }
 }

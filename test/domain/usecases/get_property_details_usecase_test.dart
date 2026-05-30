@@ -2,10 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:real_estate_mvvm_app/core/utils/result.dart';
 import 'package:real_estate_mvvm_app/data/models/property_model.dart';
-import 'package:real_estate_mvvm_app/data/repositories/property_repository.dart';
+import 'package:real_estate_mvvm_app/domain/repositories/i_property_repository.dart';
 import 'package:real_estate_mvvm_app/domain/usecases/get_property_details_usecase.dart';
 
-class MockPropertyRepository extends Mock implements PropertyRepository {}
+class MockPropertyRepository extends Mock implements IPropertyRepository {}
 
 void main() {
   late GetPropertyDetailsUseCase useCase;
@@ -22,6 +22,8 @@ void main() {
     description: 'Desc',
     price: 100000,
     bedrooms: 2,
+    bathrooms: 2,
+    squareFootage: 1200,
     imageUrl: 'http://image.com',
     propertyType: 'House',
   );

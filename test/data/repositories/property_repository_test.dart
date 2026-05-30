@@ -2,13 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:real_estate_mvvm_app/core/utils/result.dart';
-import 'package:real_estate_mvvm_app/data/datasources/local/property_database.dart';
-import 'package:real_estate_mvvm_app/data/datasources/remote/property_api_client.dart';
+import 'package:real_estate_mvvm_app/domain/interfaces/i_local_property_data_source.dart';
+import 'package:real_estate_mvvm_app/domain/interfaces/i_property_api_client.dart';
 import 'package:real_estate_mvvm_app/data/models/property_model.dart';
 import 'package:real_estate_mvvm_app/data/repositories/property_repository.dart';
 
-class MockRemoteDataSource extends Mock implements PropertyApiClient {}
-class MockLocalDataSource extends Mock implements LocalPropertyDataSource {}
+class MockRemoteDataSource extends Mock implements IPropertyApiClient {}
+class MockLocalDataSource extends Mock implements ILocalPropertyDataSource {}
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 void main() {
@@ -19,6 +19,8 @@ void main() {
         description: '',
         price: 0,
         bedrooms: 0,
+        bathrooms: 0,
+        squareFootage: 0,
         imageUrl: '',
         propertyType: '',
     ));
@@ -40,13 +42,15 @@ void main() {
     );
   });
 
-  final tProperties = [
+  final tProperties = <PropertyModel>[
     PropertyModel(
       propertyId: 1,
       title: 'Test',
       description: 'Desc',
       price: 100000,
       bedrooms: 3,
+      bathrooms: 2,
+      squareFootage: 1200,
       imageUrl: 'http://image.com',
       propertyType: 'House',
     )

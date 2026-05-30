@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +7,7 @@ import '../viewmodels/property_list_event.dart';
 import '../viewmodels/property_list_state.dart';
 import '../widgets/property_card.dart';
 import '../../core/theme/app_theme.dart';
+import '../../domain/interfaces/i_theme_service.dart';
 import '../../core/performance/performance_monitor.dart';
 import '../../domain/entities/filter_params.dart';
 
@@ -18,25 +20,37 @@ class PropertyListScreen extends StatefulWidget {
 
 class _PropertyListScreenState extends State<PropertyListScreen> {
   final ScrollController _scrollController = ScrollController();
+  double _currentFps = 60.0;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addTimingsCallback(_onReportTimings);
     context.read<PropertyListViewModel>().add(const FetchPropertiesEvent());
     
     _scrollController.addListener(() {
       if (_scrollController.hasClients && _scrollController.position.atEdge) {
         PerformanceMonitor().logMetric(
           metricType: "scrollFps", 
-          value: 60, // Placeholder
+          value: _currentFps, 
           screenName: "PropertyList"
         );
       }
     });
   }
 
+  void _onReportTimings(List<FrameTiming> timings) {
+    if (timings.isEmpty) return;
+    final lastTiming = timings.last;
+    final duration = lastTiming.totalSpan.inMicroseconds;
+    if (duration > 0) {
+      _currentFps = 1000000.0 / duration;
+    }
+  }
+
   @override
   void dispose() {
+    WidgetsBinding.instance.removeTimingsCallback(_onReportTimings);
     _scrollController.dispose();
     super.dispose();
   }
@@ -59,7 +73,7 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
           IconButton(
             icon: const Icon(Icons.brightness_6),
             onPressed: () {
-              final service = context.read<ThemeService>();
+              final service = context.read<IThemeService>();
               service.setTheme(service.selectedTheme == 'light' ? 'dark' : 'light');
             },
           ),

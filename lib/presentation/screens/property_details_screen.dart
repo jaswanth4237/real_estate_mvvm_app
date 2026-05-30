@@ -132,8 +132,8 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             _buildSpecItem(Icons.king_bed, '${property.bedrooms}', 'Beds'),
-                            _buildSpecItem(Icons.bathtub, '2', 'Baths'),
-                            _buildSpecItem(Icons.square_foot, '1,200', 'Sqft'),
+                            _buildSpecItem(Icons.bathtub, '${property.bathrooms}', 'Baths'),
+                            _buildSpecItem(Icons.square_foot, '${property.squareFootage}', 'Sqft'),
                           ],
                         ),
                       ),

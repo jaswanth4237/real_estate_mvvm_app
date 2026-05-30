@@ -7,11 +7,11 @@ import 'package:real_estate_mvvm_app/domain/usecases/get_properties_usecase.dart
 import 'package:real_estate_mvvm_app/presentation/viewmodels/property_list_event.dart';
 import 'package:real_estate_mvvm_app/presentation/viewmodels/property_list_state.dart';
 import 'package:real_estate_mvvm_app/presentation/viewmodels/property_list_viewmodel.dart';
-import 'package:real_estate_mvvm_app/core/utils/filter_persistence_service.dart';
+import 'package:real_estate_mvvm_app/domain/interfaces/i_filter_persistence_service.dart';
 import 'package:real_estate_mvvm_app/domain/entities/filter_params.dart';
 
 class MockGetPropertiesUseCase extends Mock implements GetPropertiesUseCase {}
-class MockFilterPersistenceService extends Mock implements FilterPersistenceService {}
+class MockFilterPersistenceService extends Mock implements IFilterPersistenceService {}
 
 void main() {
   late PropertyListViewModel viewModel;
@@ -41,6 +41,8 @@ void main() {
       description: 'Desc',
       price: 100000,
       bedrooms: 3,
+      bathrooms: 2,
+      squareFootage: 1200,
       imageUrl: 'http://image.com',
       propertyType: 'House',
     )

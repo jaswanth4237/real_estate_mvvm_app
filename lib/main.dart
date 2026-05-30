@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'core/di/injection_container.dart' as di;
 import 'core/theme/app_theme.dart';
+import 'domain/interfaces/i_theme_service.dart';
+import 'domain/interfaces/i_accessibility_service.dart';
 import 'presentation/screens/property_list_screen.dart';
 import 'presentation/viewmodels/property_list_viewmodel.dart';
 import 'presentation/viewmodels/property_details_viewmodel.dart';
@@ -22,12 +24,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => di.sl<ThemeService>()),
+        ChangeNotifierProvider(create: (_) => di.sl<IThemeService>() as ChangeNotifier),
         ChangeNotifierProvider(create: (_) => di.sl<PropertyDetailsViewModel>()),
         BlocProvider(create: (_) => di.sl<PropertyListViewModel>()),
-        Provider(create: (_) => di.sl<AccessibilityService>()),
+        Provider(create: (_) => di.sl<IAccessibilityService>()),
       ],
-      child: Consumer<ThemeService>(
+      child: Consumer<IThemeService>(
         builder: (context, themeService, child) {
           return MaterialApp(
             title: 'EstateView',

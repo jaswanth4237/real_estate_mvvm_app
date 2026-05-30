@@ -1,10 +1,10 @@
 import '../../core/utils/result.dart';
 import '../../data/models/property_model.dart';
-import '../../data/repositories/property_repository.dart';
+import '../repositories/i_property_repository.dart';
 
 /// Use case for fetching details of a specific property.
 class GetPropertyDetailsUseCase {
-  final PropertyRepository repository;
+  final IPropertyRepository repository;
 
   GetPropertyDetailsUseCase(this.repository);
 

@@ -2,8 +2,9 @@
 
 part of 'property_model.dart';
 
-
+// **************************************************************************
 // JsonSerializableGenerator
+// **************************************************************************
 
 PropertyModel _$PropertyModelFromJson(Map<String, dynamic> json) =>
     PropertyModel(
@@ -12,6 +13,8 @@ PropertyModel _$PropertyModelFromJson(Map<String, dynamic> json) =>
       description: json['description'] as String,
       price: (json['price'] as num).toDouble(),
       bedrooms: (json['bedrooms'] as num).toInt(),
+      bathrooms: (json['bathrooms'] as num).toInt(),
+      squareFootage: (json['squareFootage'] as num).toInt(),
       imageUrl: json['imageUrl'] as String,
       propertyType: json['propertyType'] as String,
       isFavorite: json['isFavorite'] as bool? ?? false,
@@ -24,6 +27,8 @@ Map<String, dynamic> _$PropertyModelToJson(PropertyModel instance) =>
       'description': instance.description,
       'price': instance.price,
       'bedrooms': instance.bedrooms,
+      'bathrooms': instance.bathrooms,
+      'squareFootage': instance.squareFootage,
       'imageUrl': instance.imageUrl,
       'propertyType': instance.propertyType,
       'isFavorite': instance.isFavorite,

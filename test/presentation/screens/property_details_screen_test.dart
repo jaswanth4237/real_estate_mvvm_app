@@ -32,6 +32,8 @@ void main() {
     description: 'Beautiful modern home',
     price: 350000,
     bedrooms: 4,
+    bathrooms: 2,
+    squareFootage: 1200,
     imageUrl: 'http://image.com',
     propertyType: 'House',
   );

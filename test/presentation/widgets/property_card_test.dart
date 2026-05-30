@@ -10,6 +10,8 @@ void main() {
     description: 'Beautiful villa with pool',
     price: 250000,
     bedrooms: 4,
+    bathrooms: 2,
+    squareFootage: 1200,
     imageUrl: 'http://image.com',
     propertyType: 'House',
   );

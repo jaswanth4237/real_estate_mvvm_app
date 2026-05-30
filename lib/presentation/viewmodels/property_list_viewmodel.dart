@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/property_model.dart';
-import '../../core/utils/filter_persistence_service.dart';
+import '../../domain/interfaces/i_filter_persistence_service.dart';
 import '../../domain/usecases/get_properties_usecase.dart';
 import '../../domain/entities/filter_params.dart';
 import 'property_list_event.dart';
@@ -8,7 +8,7 @@ import 'property_list_state.dart';
 
 class PropertyListViewModel extends Bloc<PropertyEvent, PropertyState> {
   final GetPropertiesUseCase getPropertiesUseCase;
-  final FilterPersistenceService filterPersistenceService;
+  final IFilterPersistenceService filterPersistenceService;
   List<PropertyModel> _allProperties = [];
   bool _isFetching = false;
 

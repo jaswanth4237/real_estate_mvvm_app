@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'property_model.g.dart';
 
+/// Data model representing a real estate property.
 @JsonSerializable()
 class PropertyModel {
   final int propertyId;
@@ -9,6 +10,8 @@ class PropertyModel {
   final String description;
   final double price;
   final int bedrooms;
+  final int bathrooms;
+  final int squareFootage;
   final String imageUrl;
   final String propertyType;
   final bool isFavorite;
@@ -19,6 +22,8 @@ class PropertyModel {
     required this.description,
     required this.price,
     required this.bedrooms,
+    required this.bathrooms,
+    required this.squareFootage,
     required this.imageUrl,
     required this.propertyType,
     this.isFavorite = false,
@@ -34,6 +39,8 @@ class PropertyModel {
     String? description,
     double? price,
     int? bedrooms,
+    int? bathrooms,
+    int? squareFootage,
     String? imageUrl,
     String? propertyType,
     bool? isFavorite,
@@ -44,6 +51,8 @@ class PropertyModel {
       description: description ?? this.description,
       price: price ?? this.price,
       bedrooms: bedrooms ?? this.bedrooms,
+      bathrooms: bathrooms ?? this.bathrooms,
+      squareFootage: squareFootage ?? this.squareFootage,
       imageUrl: imageUrl ?? this.imageUrl,
       propertyType: propertyType ?? this.propertyType,
       isFavorite: isFavorite ?? this.isFavorite,

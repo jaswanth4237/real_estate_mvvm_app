@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../domain/usecases/get_property_details_usecase.dart';
 import '../../data/models/property_model.dart';
-import '../../data/datasources/local/property_database.dart';
+import '../../domain/interfaces/i_local_property_data_source.dart';
 
 class PropertyDetailsViewModel extends ChangeNotifier {
   final GetPropertyDetailsUseCase getPropertyDetailsUseCase;
-  final LocalPropertyDataSource localDataSource;
+  final ILocalPropertyDataSource localDataSource;
 
   PropertyDetailsViewModel({
     required this.getPropertyDetailsUseCase,

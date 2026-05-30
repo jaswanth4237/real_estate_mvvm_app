@@ -18,6 +18,8 @@ void main() {
       description: '',
       price: 0,
       bedrooms: 0,
+      bathrooms: 0,
+      squareFootage: 0,
       imageUrl: '',
       propertyType: '',
     ));
@@ -42,6 +44,8 @@ void main() {
     description: 'Desc',
     price: 100000,
     bedrooms: 3,
+    bathrooms: 2,
+    squareFootage: 1500,
     imageUrl: 'http://image.com',
     propertyType: 'House',
   );

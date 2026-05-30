@@ -55,12 +55,14 @@ void main() {
       PropertyModel(
         propertyId: 1,
         title: 'Modern House',
-        description: 'Desc',
-        price: 100000,
-        bedrooms: 3,
-        imageUrl: 'http://image.com',
-        propertyType: 'House',
-      ),
+        description: 'Desc 1',
+        price: 100,
+        bedrooms: 2,
+        bathrooms: 2,
+        squareFootage: 1200,
+        imageUrl: '',
+        propertyType: 'type',
+      )
     ];
     when(() => mockViewModel.state).thenReturn(PropertyLoadedState(properties));
 

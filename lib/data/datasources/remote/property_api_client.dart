@@ -1,10 +1,13 @@
 import 'dart:convert';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'api_interceptors.dart';
 import '../../models/property_model.dart';
 import '../../../../core/utils/app_data_path.dart';
+import '../../../../domain/interfaces/i_property_api_client.dart';
 
-class PropertyApiClient {
+/// Remote data source implementation for fetching property data.
+class PropertyApiClient implements IPropertyApiClient {
   final Dio _dio;
   static const String baseUrl = 'https://jsonplaceholder.typicode.com';
 
@@ -16,6 +19,7 @@ class PropertyApiClient {
     ]);
   }
 
+  @override
   Future<List<PropertyModel>> fetchProperties({int page = 1, int limit = 10}) async {
     final response = await _dio.get('/posts', queryParameters: {
       '_page': page,
@@ -34,6 +38,7 @@ class PropertyApiClient {
     }
   }
 
+  @override
   Future<PropertyModel> getPropertyDetails(int id) async {
     final response = await _dio.get('/posts/$id');
 
@@ -58,6 +63,8 @@ class PropertyApiClient {
       description: 'A stunning $type located in the heart of $area. This property features premium finishes, spacious rooms, and great accessibility to local amenities. ${json['body']}',
       price: id * 15000.0 + 150000.0,
       bedrooms: (id % 4) + 1,
+      bathrooms: (id % 3) + 1,
+      squareFootage: ((id % 5) + 5) * 100,
       imageUrl: 'https://picsum.photos/seed/$id/800/600',
       propertyType: type,
       isFavorite: false,
@@ -69,7 +76,7 @@ class PropertyApiClient {
       final file = await AppDataPath.getFile('api_cache/properties_page_$page.json');
       await file.writeAsString(json.encode(data));
     } catch (e) {
-      print('Error caching API response: $e');
+      debugPrint('Error caching API response: $e');
     }
   }
 }
