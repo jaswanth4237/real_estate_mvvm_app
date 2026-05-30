@@ -2,12 +2,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:dio/dio.dart';
 import 'package:real_estate_mvvm_app/data/datasources/remote/property_api_client.dart';
-import 'package:real_estate_mvvm_app/data/models/property_model.dart';
 
 class MockDio extends Mock implements Dio {}
 class MockResponse extends Mock implements Response {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late PropertyApiClient client;
   late MockDio mockDio;
 

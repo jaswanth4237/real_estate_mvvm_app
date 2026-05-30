@@ -16,7 +16,8 @@ class PropertyModel {
   final String propertyType;
   final bool isFavorite;
 
-  PropertyModel({
+  /// Creates a [PropertyModel] with the required attributes.
+  const PropertyModel({
     required this.propertyId,
     required this.title,
     required this.description,

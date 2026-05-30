@@ -8,7 +8,6 @@ import 'domain/interfaces/i_accessibility_service.dart';
 import 'presentation/screens/property_list_screen.dart';
 import 'presentation/viewmodels/property_list_viewmodel.dart';
 import 'presentation/viewmodels/property_details_viewmodel.dart';
-import 'core/di/accessibility/accessibility_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

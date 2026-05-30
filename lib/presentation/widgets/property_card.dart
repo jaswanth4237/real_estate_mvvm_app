@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get_it/get_it.dart';
-import '../../core/feature_flags/feature_flag_service.dart';
+import '../../domain/interfaces/i_feature_flag_service.dart';
 import '../../data/models/property_model.dart';
 import '../screens/property_details_screen.dart';
 
@@ -21,7 +21,7 @@ class PropertyCard extends StatelessWidget {
         elevation: 4,
         child: InkWell(
           onTap: () {
-            GetIt.I<FeatureFlagService>().logUsage('new_property_card_design');
+            GetIt.I<IFeatureFlagService>().logUsage('new_property_card_design');
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -59,7 +59,7 @@ class PropertyCard extends StatelessWidget {
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black.withValues(alpha: 0.6),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -95,7 +95,7 @@ class PropertyCard extends StatelessWidget {
                       children: [
                         _infoBadge(Icons.king_bed, '${property.bedrooms} Beds'),
                         const SizedBox(width: 12),
-                        _infoBadge(Icons.square_foot, '1,200 sqft'), // Placeholder for area
+                        _infoBadge(Icons.square_foot, '${property.squareFootage} sqft'),
                       ],
                     ),
                   ],

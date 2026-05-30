@@ -8,6 +8,8 @@ class MockResponseInterceptorHandler extends Mock implements ResponseInterceptor
 class MockErrorInterceptorHandler extends Mock implements ErrorInterceptorHandler {}
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   test('LoggingInterceptor should call next on request', () {
     final interceptor = LoggingInterceptor();
     final options = RequestOptions(path: '/test');

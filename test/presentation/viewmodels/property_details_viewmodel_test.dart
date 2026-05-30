@@ -1,18 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:real_estate_mvvm_app/core/utils/result.dart';
-import 'package:real_estate_mvvm_app/data/datasources/local/property_database.dart';
 import 'package:real_estate_mvvm_app/core/error/failures.dart';
 import 'package:real_estate_mvvm_app/data/models/property_model.dart';
 import 'package:real_estate_mvvm_app/domain/usecases/get_property_details_usecase.dart';
 import 'package:real_estate_mvvm_app/presentation/viewmodels/property_details_viewmodel.dart';
 
+import 'package:real_estate_mvvm_app/domain/repositories/i_property_repository.dart';
+
 class MockGetPropertyDetailsUseCase extends Mock implements GetPropertyDetailsUseCase {}
-class MockLocalPropertyDataSource extends Mock implements LocalPropertyDataSource {}
+class MockPropertyRepository extends Mock implements IPropertyRepository {}
 
 void main() {
   setUpAll(() {
-    registerFallbackValue(PropertyModel(
+    registerFallbackValue(const PropertyModel(
       propertyId: 0,
       title: '',
       description: '',
@@ -27,18 +28,18 @@ void main() {
 
   late PropertyDetailsViewModel viewModel;
   late MockGetPropertyDetailsUseCase mockUseCase;
-  late MockLocalPropertyDataSource mockDataSource;
+  late MockPropertyRepository mockRepository;
 
   setUp(() {
     mockUseCase = MockGetPropertyDetailsUseCase();
-    mockDataSource = MockLocalPropertyDataSource();
+    mockRepository = MockPropertyRepository();
     viewModel = PropertyDetailsViewModel(
       getPropertyDetailsUseCase: mockUseCase,
-      localDataSource: mockDataSource,
+      repository: mockRepository,
     );
   });
 
-  final tProperty = PropertyModel(
+  final tProperty = const PropertyModel(
     propertyId: 1,
     title: 'Test',
     description: 'Desc',
@@ -68,7 +69,7 @@ void main() {
     // arrange
     when(() => mockUseCase.execute(1))
         .thenAnswer((_) async => Success(tProperty));
-    when(() => mockDataSource.toggleFavorite(any()))
+    when(() => mockRepository.toggleFavorite(any()))
         .thenAnswer((_) async => Future.value());
 
     // act
@@ -77,13 +78,13 @@ void main() {
 
     // assert
     expect(viewModel.property!.isFavorite, true);
-    verify(() => mockDataSource.toggleFavorite(any())).called(1);
+    verify(() => mockRepository.toggleFavorite(any())).called(1);
   });
 
   test('should set error message when loading fails', () async {
     // arrange
     when(() => mockUseCase.execute(1))
-        .thenAnswer((_) async => FailureResult(ServerFailure('API Error')));
+        .thenAnswer((_) async => const FailureResult(ServerFailure('API Error')));
 
     // act
     await viewModel.loadPropertyDetails(1);

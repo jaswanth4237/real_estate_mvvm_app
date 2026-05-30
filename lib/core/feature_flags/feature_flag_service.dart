@@ -6,14 +6,19 @@ import '../utils/app_data_path.dart';
 import '../../domain/interfaces/i_feature_flag_service.dart';
 import '../constants.dart';
 
+/// JSON-file-backed implementation of [IFeatureFlagService].
+///
+/// Feature flags are loaded from `assets/feature_flags.json` at startup and
+/// usage events are appended to [AppConstants.fileFeatureUsage].
 class FeatureFlagService implements IFeatureFlagService {
   Map<String, dynamic> _flags = {};
 
+  /// Loads feature flag definitions from the bundled JSON asset.
   @override
   Future<void> init() async {
     final String response = await rootBundle.loadString('assets/feature_flags.json');
-    final data = await json.decode(response);
-    _flags = {for (var item in data['flags']) item['flagKey']: item};
+    final data = json.decode(response) as Map<String, dynamic>;
+    _flags = {for (var item in data['flags'] as List) item['flagKey'] as String: item};
   }
 
   @override

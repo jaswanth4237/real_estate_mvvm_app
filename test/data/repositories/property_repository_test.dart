@@ -43,7 +43,7 @@ void main() {
   });
 
   final tProperties = <PropertyModel>[
-    PropertyModel(
+    const PropertyModel(
       propertyId: 1,
       title: 'Test',
       description: 'Desc',
@@ -101,5 +101,32 @@ void main() {
     // assert
     expect(result, isA<Success<PropertyModel>>());
     expect(result.data, tProperty);
+  });
+
+  test('should toggle favorite on local data source', () async {
+    // arrange
+    final tProperty = tProperties.first;
+    when(() => mockLocalDataSource.toggleFavorite(any()))
+        .thenAnswer((_) async => Future.value());
+
+    // act
+    await repository.toggleFavorite(tProperty);
+
+    // assert
+    verify(() => mockLocalDataSource.toggleFavorite(tProperty)).called(1);
+  });
+
+  test('should return favorites from local data source', () async {
+    // arrange
+    when(() => mockLocalDataSource.getFavorites())
+        .thenAnswer((_) async => tProperties);
+
+    // act
+    final result = await repository.getFavorites();
+
+    // assert
+    expect(result, isA<Success<List<PropertyModel>>>());
+    expect(result.data, tProperties);
+    verify(() => mockLocalDataSource.getFavorites()).called(1);
   });
 }

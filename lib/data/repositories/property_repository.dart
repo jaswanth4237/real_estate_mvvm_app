@@ -61,12 +61,27 @@ class PropertyRepository implements IPropertyRepository {
       final properties = await localDataSource.getProperties();
       return Success(properties);
     } catch (e) {
-      return FailureResult(CacheFailure());
+      return const FailureResult(CacheFailure());
     }
   }
 
   @override
   Future<void> cacheProperties(List<PropertyModel> properties) async {
     await localDataSource.insertProperties(properties);
+  }
+
+  @override
+  Future<void> toggleFavorite(PropertyModel property) async {
+    await localDataSource.toggleFavorite(property);
+  }
+
+  @override
+  Future<Result<List<PropertyModel>>> getFavorites() async {
+    try {
+      final properties = await localDataSource.getFavorites();
+      return Success(properties);
+    } catch (e) {
+      return FailureResult(CacheFailure(e.toString()));
+    }
   }
 }

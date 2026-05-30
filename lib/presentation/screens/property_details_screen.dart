@@ -70,7 +70,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 ),
                 actions: [
                   CircleAvatar(
-                    backgroundColor: Colors.white.withOpacity(0.3),
+                    backgroundColor: Colors.white.withValues(alpha: 0.3),
                     child: IconButton(
                       icon: Icon(
                         property.isFavorite ? Icons.favorite : Icons.favorite_border,
@@ -94,7 +94,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).primaryColor.withOpacity(0.1),
+                              color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: Text(

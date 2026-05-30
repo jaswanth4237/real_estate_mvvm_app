@@ -13,26 +13,38 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.2'
           channel: 'stable'
-          
+
       - name: Install dependencies
         run: flutter pub get
-        
+
       - name: Analyze code
         run: flutter analyze
-        
+
       - name: Run tests with coverage
         run: flutter test --coverage
-        
-      - name: Build release APK
-        run: flutter build apk --release --no-pub
-        
+
+      - name: Upload coverage report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-report
+          path: coverage/lcov.info
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           file: coverage/lcov.info
+
+      - name: Build release APK
+        run: flutter build apk --release --no-pub
+
+      - name: Upload release APK artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk

@@ -7,9 +7,9 @@ import '../constants.dart';
 
 /// A singleton service for tracking and exporting application performance metrics.
 ///
-/// Metrics are appended to [AppConstants.filePerformanceMetrics] in the app data
-/// directory. Each entry records a [metricType], a numeric [value], a timestamp,
-/// and the originating [screenName].
+/// Metrics are appended to the file path defined in `AppConstants.filePerformanceMetrics`
+/// in the app data directory. Each entry records a `metricType`, a numeric
+/// `value`, a timestamp, and the originating `screenName`.
 class PerformanceMonitor {
   static final PerformanceMonitor _instance = PerformanceMonitor._internal();
 

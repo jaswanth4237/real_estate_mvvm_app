@@ -8,6 +8,8 @@ void main() {
     description: 'Desc',
     price: 100000,
     bedrooms: 2,
+    bathrooms: 1,
+    squareFootage: 900,
     imageUrl: 'http://image.com',
     propertyType: 'House',
   );

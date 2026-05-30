@@ -63,7 +63,7 @@ Future<void> init() async {
   ));
   sl.registerFactory(() => PropertyDetailsViewModel(
     getPropertyDetailsUseCase: sl(),
-    localDataSource: sl(),
+    repository: sl(),
   ));
 
   // Initialize Services

@@ -1,12 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import '../viewmodels/property_list_viewmodel.dart';
 import '../viewmodels/property_list_event.dart';
 import '../viewmodels/property_list_state.dart';
 import '../widgets/property_card.dart';
-import '../../core/theme/app_theme.dart';
 import '../../domain/interfaces/i_theme_service.dart';
 import '../../core/performance/performance_monitor.dart';
 import '../../domain/entities/filter_params.dart';
@@ -65,7 +63,7 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Theme.of(context).primaryColor, Theme.of(context).primaryColor.withOpacity(0.8)],
+              colors: [Theme.of(context).primaryColor, Theme.of(context).primaryColor.withValues(alpha: 0.8)],
             ),
           ),
         ),
@@ -138,7 +136,7 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
                 const Text('Filters', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
                 TextButton(
                   onPressed: () {
-                    context.read<PropertyListViewModel>().add(ApplyFilterEvent(FilterParams()));
+                    context.read<PropertyListViewModel>().add(const ApplyFilterEvent(FilterParams()));
                     Navigator.pop(sheetContext);
                   },
                   child: const Text('Reset'),
@@ -148,11 +146,11 @@ class _PropertyListScreenState extends State<PropertyListScreen> {
             const Divider(),
             const SizedBox(height: 16),
             const Text('Price Range', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            _filterOption(sheetContext, 'Budget: Under \$500,000', FilterParams(maxPrice: 500000)),
-            _filterOption(sheetContext, 'Premium: Over \$500,000', FilterParams(minPrice: 500000)),
+            _filterOption(sheetContext, 'Budget: Under \$500,000', const FilterParams(maxPrice: 500000)),
+            _filterOption(sheetContext, 'Premium: Over \$500,000', const FilterParams(minPrice: 500000)),
             const SizedBox(height: 16),
             const Text('Bedrooms', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            _filterOption(sheetContext, '3 or More Bedrooms', FilterParams(bedrooms: 3)),
+            _filterOption(sheetContext, '3 or More Bedrooms', const FilterParams(bedrooms: 3)),
             const SizedBox(height: 24),
           ],
         ),

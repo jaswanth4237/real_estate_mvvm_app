@@ -1,3 +1,5 @@
+import '../../core/constants.dart';
+
 /// Contract for the dynamic theme management service.
 ///
 /// Implementations load colour values from a JSON asset file and persist the

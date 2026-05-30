@@ -17,4 +17,10 @@ abstract class IPropertyRepository {
 
   /// Persists the given [properties] list to the local cache.
   Future<void> cacheProperties(List<PropertyModel> properties);
+
+  /// Toggles the favourite status of a property.
+  Future<void> toggleFavorite(PropertyModel property);
+
+  /// Returns a list of all favourite properties.
+  Future<Result<List<PropertyModel>>> getFavorites();
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../domain/usecases/get_property_details_usecase.dart';
 import '../../data/models/property_model.dart';
-import '../../domain/interfaces/i_local_property_data_source.dart';
+import '../../domain/repositories/i_property_repository.dart';
 
 class PropertyDetailsViewModel extends ChangeNotifier {
   final GetPropertyDetailsUseCase getPropertyDetailsUseCase;
-  final ILocalPropertyDataSource localDataSource;
+  final IPropertyRepository repository;
 
   PropertyDetailsViewModel({
     required this.getPropertyDetailsUseCase,
-    required this.localDataSource,
+    required this.repository,
   });
 
   PropertyModel? _property;
@@ -45,7 +45,7 @@ class PropertyDetailsViewModel extends ChangeNotifier {
     if (_property != null) {
       final updatedProperty = _property!.copyWith(isFavorite: !_property!.isFavorite);
       _property = updatedProperty;
-      await localDataSource.toggleFavorite(updatedProperty);
+      await repository.toggleFavorite(updatedProperty);
       notifyListeners();
     }
   }
